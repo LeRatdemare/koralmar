@@ -1,0 +1,40 @@
+<html>
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'calapp/css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'calapp/css/navbar.css' %}">
+        <title>Koralmar</title>
+    </head>
+    <body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <nav id='menu'>
+            <ul>
+                <li><a href="{% url 'index' %}">Accueil</a></li>
+                <li><a href="{% url 'events' %}">Nos évènements</a></li>
+                <li><a href="{% url 'solfege' %}">Solfège</a></li>
+                <li><a href="{% url 'contact-us' %}">Nous contacter</a></li>
+                <!-- Si on veut rajouter des sous-items :
+                <li><a class='dropdown-arrow' href="{% url 'index' %}">Groupes</a>
+                    ET
+                <ul class='sub-menus'>
+                    <li><a href='http://'>Sous-groupe 1</a></li>
+                </ul>
+                </li>
+                -->
+            </ul>
+          </nav>
+        <div id='block_central'>
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
