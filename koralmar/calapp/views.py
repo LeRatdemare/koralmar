@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from calapp.models import Photo
+from calapp.forms import PhotoForm
 # from PIL import Image
 
 # Create your views here.
@@ -17,4 +19,12 @@ def choir(request):
     return render(request, 'calapp/choir.html')
 
 def contact_us(request):
-    return render(request, 'calapp/contact_us.html')
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            context = {'form': form}
+            return render(request, 'calapp/contact_us.html', context=context)
+    context = {'form': PhotoForm}
+    return render(request, 'calapp/contact_us.html', context=context)

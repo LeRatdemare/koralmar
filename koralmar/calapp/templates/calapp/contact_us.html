@@ -1,8 +1,14 @@
-{% extends 'calapp/base.html' %}
-
-{% block content  %}
+{% extends 'calapp/base.html' %} {% block content %}
 
 <h1>Nous contacter</h1>
+
+<h2>Envoyer une image</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Envoyer" />
+</form>
+
 <p>coming soon... or not ?</p>
 
 {% endblock %}
