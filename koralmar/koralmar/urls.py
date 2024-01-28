@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('events/', views.events, name='events'),
     path('solfege/', views.solfege, name='solfege'),
+    path('choir/', views.choir, name='choir'),
     path('contact-us/', views.contact_us, name='contact-us'),
 ]

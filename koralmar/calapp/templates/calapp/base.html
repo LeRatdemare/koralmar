@@ -1,6 +1,7 @@
+{% load static %}
+{% get_media_prefix as MEDIA_PREFIX %}
 <html>
     <head>
-        {% load static %}
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +23,12 @@
                 <li><a href="{% url 'index' %}">Accueil</a></li>
                 <li><a href="{% url 'events' %}">Nos évènements</a></li>
                 <li><a href="{% url 'solfege' %}">Solfège</a></li>
+                <li><a href="{% url 'choir' %}">La chorale</a>
+                <ul>
+                    <li><a href=''>Sondages</a></li>
+                    <li><a href=''>Forum</a></li>
+                </ul>
+                </li>
                 <li><a href="{% url 'contact-us' %}">Nous contacter</a></li>
                 <!-- Si on veut rajouter des sous-items :
                 <li><a class='dropdown-arrow' href="{% url 'index' %}">Groupes</a>
@@ -34,6 +41,8 @@
             </ul>
           </nav>
         <div id='block_central'>
+            <p> {{ MEDIA_PREFIX }}croquis_logo3.png</p>
+            <img src="{{ MEDIA_PREFIX }}croquis_logo3.png"/>
             {% block content %}{% endblock %}
         </div>
     </body>
