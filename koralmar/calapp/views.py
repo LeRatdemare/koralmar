@@ -24,7 +24,7 @@ def choir(request):
 def contact_us(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid() and koralmar.dbinfos.host == "localhost":
+        if form.is_valid() : # and koralmar.dbinfos.host == "localhost"
             # Petite vérification pour bloquer les ajouts abusifs au début
             form.save()
         else:
