@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from calapp import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -25,4 +27,4 @@ urlpatterns = [
     path('solfege/', views.solfege, name='solfege'),
     path('choir/', views.choir, name='choir'),
     path('contact-us/', views.contact_us, name='contact-us'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
