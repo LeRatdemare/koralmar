@@ -1,5 +1,4 @@
 {% load static %}
-{% get_media_prefix as MEDIA_PREFIX %}
 <html>
     <head>
         <meta charset="UTF-8">
@@ -41,8 +40,6 @@
             </ul>
           </nav>
         <div id='block_central'>
-            <p> {{ MEDIA_PREFIX }}photos/chorale-enfant.png</p>
-            <img src="{{ MEDIA_PREFIX }}photos/chorale-enfant.png"/>
             {% block content %}{% endblock %}
         </div>
     </body>

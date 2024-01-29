@@ -1,6 +1,12 @@
 {% extends 'calapp/base.html' %} {% block content %}
 
 <h1>La chorale</h1>
+
+<h2>Banque de photos</h2>
+{% for photo in photos %}
+{% include 'calapp/includes/photo.html' with photo=photo %}<br>
+{% endfor %}
+
 <p>coming soon... or not ?</p>
 
 {% endblock %}

@@ -17,12 +17,14 @@ def solfege(request):
     return render(request, 'calapp/solfege.html')
 
 def choir(request):
-    return render(request, 'calapp/choir.html')
+    photos = Photo.objects.all()
+    context = {'photos': photos}
+    return render(request, 'calapp/choir.html', context=context)
 
 def contact_us(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid() and koralmar.dbinfos.host is "localhost":
+        if form.is_valid() and koralmar.dbinfos.host == "localhost":
             # Petite vérification pour bloquer les ajouts abusifs au début
             form.save()
         else:
@@ -30,3 +32,5 @@ def contact_us(request):
             return render(request, 'calapp/contact_us.html', context=context)
     context = {'form': PhotoForm}
     return render(request, 'calapp/contact_us.html', context=context)
+
+############################ Includes
