@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from calapp.models import Photo
 from calapp.forms import PhotoForm
+import koralmar.dbinfos
 # from PIL import Image
 
 # Create your views here.
@@ -22,7 +23,9 @@ def contact_us(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            # Petite vérification pour bloquer les ajouts abusifs au début
+            if koralmar.dbinfos.host == "localhost":
+                form.save()
         else:
             context = {'form': form}
             return render(request, 'calapp/contact_us.html', context=context)
