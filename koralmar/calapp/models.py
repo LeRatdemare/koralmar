@@ -34,9 +34,12 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     Deletes file from filesystem
     when corresponding `MediaFile` object is deleted.
     """
-    if instance.file:
-        if os.path.isfile(instance.file.path):
-            os.remove(instance.file.path)
+    try :
+        if instance.file:
+            if os.path.isfile(instance.file.path):
+                os.remove(instance.file.path)
+    except:
+        print("No file attached to photo")
 
 @receiver(models.signals.pre_save, sender=Photo)
 def auto_delete_file_on_change(sender, instance, **kwargs):
