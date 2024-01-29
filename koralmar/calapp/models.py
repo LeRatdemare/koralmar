@@ -48,15 +48,18 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     when corresponding `MediaFile` object is updated
     with new file.
     """
-    if not instance.pk:
-        return False
+    try :
+        if not instance.pk:
+            return False
 
-    try:
-        old_file = Photo.objects.get(pk=instance.pk).file
-    except Photo.DoesNotExist:
-        return False
+        try:
+            old_file = Photo.objects.get(pk=instance.pk).file
+        except Photo.DoesNotExist:
+            return False
 
-    new_file = instance.file
-    if not old_file == new_file:
-        if os.path.isfile(old_file.path):
-            os.remove(old_file.path)
+        new_file = instance.file
+        if not old_file == new_file:
+            if os.path.isfile(old_file.path):
+                os.remove(old_file.path)
+    except:
+        print("A problem occured... Probably no file is attached to instance of Photo")
