@@ -35,9 +35,9 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     when corresponding `MediaFile` object is deleted.
     """
     try :
-        if instance.file:
-            if os.path.isfile(instance.file.path):
-                os.remove(instance.file.path)
+        if instance.photo:
+            if os.path.isfile(instance.photo.path):
+                os.remove(instance.photo.path)
     except:
         print("No file attached to photo")
 
@@ -53,11 +53,11 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
             return False
 
         try:
-            old_file = Photo.objects.get(pk=instance.pk).file
+            old_file = Photo.objects.get(pk=instance.pk).photo
         except Photo.DoesNotExist:
             return False
 
-        new_file = instance.file
+        new_file = instance.photo
         if not old_file == new_file:
             if os.path.isfile(old_file.path):
                 os.remove(old_file.path)
