@@ -91,3 +91,4 @@ db.sqlite3
 ### Mes bails
 user.txt
 koralmar/media/*
+/dbinfos.py
