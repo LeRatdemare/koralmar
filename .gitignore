@@ -90,6 +90,6 @@ db.sqlite3
 
 ### Mes bails
 user.txt
-koralmar/media/*
+koralmar/calapp/media/*
 dbinfos.py
 koralmar/calapp/static/admin/*
