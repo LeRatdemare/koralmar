@@ -22,10 +22,9 @@ def choir(request):
 def contact_us(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid() and koralmar.dbinfos.host is "localhost":
             # Petite vérification pour bloquer les ajouts abusifs au début
-            if koralmar.dbinfos.host == "localhost":
-                form.save()
+            form.save()
         else:
             context = {'form': form}
             return render(request, 'calapp/contact_us.html', context=context)
