@@ -14,7 +14,8 @@ def events(request):
     return render(request, 'calapp/events.html')
 
 def solfege(request):
-    return render(request, 'calapp/solfege.html')
+    context = { 'cookies': request.COOKIES, 'user': request.user}
+    return render(request, 'calapp/solfege.html', context=context)
 
 def choir(request):
     photos = Photo.objects.all()

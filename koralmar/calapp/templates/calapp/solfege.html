@@ -3,6 +3,15 @@
 {% block content  %}
 
 <h1>Solfège</h1>
+
+<ul>
+{% for cookie in cookies %}
+<li>{{ cookie }}</li>
+{% endfor %}
+<li> {{ cookies.sessionid }}</li>
+<li> {{ user }}</li>
+</ul>
+
 <p>coming soon... or not ?</p>
 
 {% endblock %}

@@ -1,9 +1,21 @@
 import os
 from django.db import models
 from django.dispatch import receiver
-
+from django.core.exceptions import ValidationError
+ 
+# creating a validator function
+def validate_ensc_mail(value):
+    if "@ensc.fr" in value:
+        return value
+    else:
+        raise ValidationError("Vous devez vous inscrire avec une adresse ensc.")
+    
 class User(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(max_length=255, validators=[validate_ensc_mail])
+    login = models.CharField(max_length=50)
+    password = models.IntegerField(default=0)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
