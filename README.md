@@ -8,7 +8,16 @@
 * Avoir la version 3.9 de python --> commande `python --version` dans un terminal pour voir la version
 * Avoir [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.0&os=windows&cpu=x86_64&pkg=msi&m=icam) installé sur sa machine --> Saisir "MariaDB" dans sa barre de recherche pour savoir si le logiciel est installé
 
-### Configuration de l'environnement (1 fois)
+### Lancer l'application locale
+
+0) S'assurer d'avoir déjà configuré l'environnement (Tuto en dessous)
+1) Ouvrir un terminal bash et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
+2) \[terminal\] Activer l'environnement de travail --> `source env/Script/activate`
+3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
+4) \[terminal\] Lancer l'application --> `python manage.py runserver`
+5) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+
+### Configuration de l'environnement (1ère fois seulement)
 
 1) \[terminal\] Lancer un terminal et se placer dans le dossier souhaité avec la commande `cd`
 2) \[terminal\] Récupérer le dépôt en entrant la commande `git clone "https://github.com/LeRatdemare/koralmar.git"`
@@ -37,4 +46,12 @@ db_name = "database_name"
 
 **Le site est lancé !**
 
-15) Saisir le lien dans la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+15) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+
+### Lancer l'application locale
+
+1) Ouvrir un terminal bash et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
+2) \[terminal\] Activer l'environnement de travail --> `source env/Script/activate`
+3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
+4) \[terminal\] Lancer l'application --> `python manage.py runserver`
+5) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
