@@ -11,7 +11,13 @@ class PhotoForm(forms.ModelForm):
             'photo': "Image",
         }
 
-class UserLoginForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('login', 'password')
+        fields = ('name', 'email', 'login', 'profile_picture')
+        labels = {
+            'name': 'Nom',
+            'email': 'Adresse mail (ensc)',
+            'login': 'Login',
+            'profile_picture': 'Photo de profil',
+        }

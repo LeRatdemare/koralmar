@@ -1,7 +1,8 @@
 import calapp.logic as logic
 from calapp.models import Photo, User
+from calapp.forms import PhotoForm, UserForm
 from django.shortcuts import render, redirect
-from calapp.forms import PhotoForm, UserLoginForm
+from django.forms import Form
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 # from PIL import Image
@@ -37,8 +38,7 @@ def contact_us(request):
     # Puis on regarde s'il vient de soummettre un formulaire
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid() : # and koralmar.dbinfos.host == "localhost"
-            # Petite vérification pour bloquer les ajouts abusifs au début
+        if form.is_valid() :
             form.save()
         else:
             context = {'form': form}
@@ -46,7 +46,20 @@ def contact_us(request):
     context = { 'form': PhotoForm }
     return render(request, 'calapp/contact_us.html', context=context)
 
-############################ LOGIC
+def register(request): # A TRAVAILLER --> Verification et enregistrement des données
+    # Puis on regarde s'il vient de soummettre un formulaire
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        # On vérifie que le form soit valide
+        if form.is_valid() :
+            form.save()
+            messages.success(request, "Compte créé avec succès.")
+            return redirect('index')
+        else:
+            context = {'form': form}
+            return render(request, 'calapp/register.html', context=context)
+    context = { 'form': UserForm }
+    return render(request, 'calapp/register.html', context=context)
 
 def login(request):
     # Si l'utilisateur est déjà connecté on le redirige à l'accueil
@@ -76,7 +89,9 @@ def login(request):
     # Si on vient seulement d'arriver sur la page et qu'on n'est pas connectés, on charge le formulaire
     context = { }
     return render(request, 'calapp/login.html', context=context)
-    
+
+############################ LOGIC
+
 def logout(request):
     try:
         del request.session["user_id"]
