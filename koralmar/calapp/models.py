@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import check_password
  
 # creating a validator function
 def validate_ensc_mail(value):
@@ -14,8 +15,11 @@ class User(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(max_length=255, validators=[validate_ensc_mail])
     login = models.CharField(max_length=50)
-    password = models.IntegerField(default=0)
+    password = models.CharField(max_length=255) # A hasher
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+
+    def check_password(self, pwd):
+        return check_password(pwd, self.password)
 
     def __str__(self):
         return f"{self.name}"

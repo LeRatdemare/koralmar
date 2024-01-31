@@ -27,5 +27,7 @@ urlpatterns = [
     path('solfege/', views.solfege, name='solfege'),
     path('choir/', views.choir, name='choir'),
     path('contact-us/', views.contact_us, name='contact-us'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     # path('get-photo/<int:id>/', views.get_photo, name='get-photo'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
