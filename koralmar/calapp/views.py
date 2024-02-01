@@ -52,16 +52,26 @@ def register(request): # A TRAVAILLER --> Verification et enregistrement des don
         form = UserForm(request.POST, request.FILES)
         # On vérifie que le form soit valide
         if form.is_valid() :
-            if request.POST['password'] == request.POST['confirmation']:
-                created_user = form.save(commit=False)
-                created_user.password = make_password(request.POST['password'])
-                created_user.save()
-                messages.success(request, "Compte créé avec succès.")
-                return redirect('index')
-            else:
+            # On vérifie s'il y a un problème dans la saisie de l'utilisateur
+            if User.objects.filter(login=form.cleaned_data['login']).exists():
+                messages.error(request, "Il existe déjà un utilisateur avec ce login.")
+                context = {'form': form}
+                return render(request, 'calapp/register.html', context=context)
+            if User.objects.filter(email=form.cleaned_data['email']).exists():
+                messages.error(request, "Il existe déjà un utilisateur avec cet email.")
+                context = {'form': form}
+                return render(request, 'calapp/register.html', context=context)
+            if request.POST['password'] != request.POST['confirmation']:
                 messages.error(request, "Veuillez bien recopier votre mot de passe.")
                 context = {'form': form}
                 return render(request, 'calapp/register.html', context=context)
+            # Si tout se passe bien, on enregistre l'inscription
+            created_user = form.save(commit=False)
+            created_user.password = make_password(request.POST['password'])
+            created_user.save()
+            messages.success(request, "Compte créé avec succès.")
+            return redirect('index')
+                
         else:
             messages.error(request, "Le form soumis n'est pas valide.")
             context = {'form': form}
