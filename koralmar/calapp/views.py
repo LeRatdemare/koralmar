@@ -69,7 +69,8 @@ def register(request): # A TRAVAILLER --> Verification et enregistrement des don
             created_user = form.save(commit=False)
             created_user.password = make_password(request.POST['password'])
             created_user.save()
-            messages.success(request, "Compte créé avec succès.")
+            request.session["user_id"] = created_user.id
+            messages.success(request, "Compte créé avec succès, vous êtes maintenant connecté.")
             return redirect('index')
                 
         else:
@@ -99,7 +100,7 @@ def login(request):
         # On vérifie que le mot de passe est le bon
         if user.check_password(request.POST["password"]):
             request.session["user_id"] = user.id
-            messages.success(request, "Vous avez été connecté avec succès.")
+            messages.success(request, "Vous êtes maintenant connecté.")
             return redirect('index')
         else:
             messages.error(request, "Le login et le mot de passe ne coïncident pas.")
