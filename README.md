@@ -24,22 +24,22 @@
 3) \[terminal\] Se déplacer dans le dossier avec la commande `cd koralmar`
 4) \[terminal\] Créer un environnement virtuel avec `python3.9 -m venv env`
 5) \[terminal\] Activer l'environnement virtuel avec `source env/Scripts/activate`
-6) \[terminal\] Télécharger toutes les dépendances du projet avec `pip install -r requierements.txt`
-7) \[MySQL Client\] Se connecter sur le terminal "MySQL client" (disponible si MariaDB est installé) ou créer un identifiant et un mot de passe si besoin. **!!! BIEN LES ENREGISTRER !!!**
+6) \[terminal\] Télécharger toutes les dépendances du projet avec `pip install -r requirements.txt`
+7) \[MySQL Client\] Se connecter sur le terminal "MySQL client" (disponible si MariaDB est installé) ou créer un identifiant et un mot de passe si besoin. **!!! BIEN LES ENREGISTRER et PAS DE CARACTERES SPECIAUX !!!**
 8) \[MySQL Client\] Créer une base de donnée MySQL en étant connecté avec la commande `create database koralmar_db;`
-9) \[MySQL Client\] Changer la DB active avec la commande `use 'db_name';`
+9) \[MySQL Client\] Changer la DB active avec la commande `use 'koralmar_db';`
 10) \[MySQL Client\] Créer un utilisateur en local pour la DB avec la commande `CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';`
-11) \[MySQL Client\] Accorder tous les privilèges sur la DB à l'utilisateur créé avec la commande `GRANT ALL PRIVILEGES ON database_name.\* TO 'user'@'localhost';`
+11) \[MySQL Client\] Accorder tous les privilèges sur la DB à l'utilisateur créé avec la commande `GRANT ALL PRIVILEGES ON koralmar_db.* TO 'user'@'localhost';`
 
 **Enfin ! L'application est presque prête !**
 
 12) Depuis le dossier racine (celui où se trouvent les fichiers 'requirements.txt' et 'README.md' entre autres), aller dans 'koralmar/' puis encore 'koralmar/' et créer le fichier dbinfos.py contenant :
 ```
-host = "localhost"
-port = 3306
-user = "user"
-password = "password"
-db_name = "database_name"
+host = "localhost" # Ne pas toucher
+port = 3306 # Ne pas toucher
+user = "user" # Remplacer par votre nom d'utilisateur
+password = "password" # Remplacer par votre mot de passe
+db_name = "koralmar_db"
 ```
 13) \[terminal\] Appliquer les migrations à la base de donnée ainsi créée avec la commande `python manage.py migrate` (**Remarque :** Il faut être dans le dossier où se trouve le fichier 'manage.py' ou l'un de ses sous-dossiers pour que la commande soit reconnue)
 14) \[terminal\] Vous pouvez désormais lancer le serveur avec la commande `python manage.py runserver`
@@ -47,11 +47,3 @@ db_name = "database_name"
 **Le site est lancé !**
 
 15) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
-
-### Lancer l'application locale
-
-1) Ouvrir un terminal bash et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
-2) \[terminal\] Activer l'environnement de travail --> `source env/Script/activate`
-3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
-4) \[terminal\] Lancer l'application --> `python manage.py runserver`
-5) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
