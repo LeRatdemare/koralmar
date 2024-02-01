@@ -41,9 +41,11 @@ user = "user" # Remplacer par votre nom d'utilisateur
 password = "password" # Remplacer par votre mot de passe
 db_name = "koralmar_db"
 ```
+![Fichier dbinfos](screenshots/Fichier_dbinfos.jpg)
 13) \[terminal\] Appliquer les migrations à la base de donnée ainsi créée avec la commande `python manage.py migrate` (**Remarque :** Il faut être dans le dossier où se trouve le fichier 'manage.py' ou l'un de ses sous-dossiers pour que la commande soit reconnue)
 14) \[terminal\] Vous pouvez désormais lancer le serveur avec la commande `python manage.py runserver`
 
 **Le site est lancé !**
 
 15) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+![Saisir l'url](screenshots/url_koralmar.jpg)
