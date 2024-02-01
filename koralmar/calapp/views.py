@@ -52,10 +52,18 @@ def register(request): # A TRAVAILLER --> Verification et enregistrement des don
         form = UserForm(request.POST, request.FILES)
         # On vérifie que le form soit valide
         if form.is_valid() :
-            form.save()
-            messages.success(request, "Compte créé avec succès.")
-            return redirect('index')
+            if request.POST['password'] == request.POST['confirmation']:
+                created_user = form.save(commit=False)
+                created_user.password = make_password(request.POST['password'])
+                created_user.save()
+                messages.success(request, "Compte créé avec succès.")
+                return redirect('index')
+            else:
+                messages.error(request, "Veuillez bien recopier votre mot de passe.")
+                context = {'form': form}
+                return render(request, 'calapp/register.html', context=context)
         else:
+            messages.error(request, "Le form soumis n'est pas valide.")
             context = {'form': form}
             return render(request, 'calapp/register.html', context=context)
     context = { 'form': UserForm }
@@ -76,15 +84,15 @@ def login(request):
         try:
             user = User.objects.get(login=request.POST["login"])
         except User.DoesNotExist:
-            messages.error(request, "Login does not exist.")
+            messages.error(request, "Le login n'existe pas.")
             return redirect('login')
         # On vérifie que le mot de passe est le bon
         if user.check_password(request.POST["password"]):
             request.session["user_id"] = user.id
-            messages.success(request, "You have been successfully connected.")
+            messages.success(request, "Vous avez été connecté avec succès.")
             return redirect('index')
         else:
-            messages.error(request, "Login and password do not match")
+            messages.error(request, "Le login et le mot de passe ne coïncident pas.")
             return redirect('login')
     # Si on vient seulement d'arriver sur la page et qu'on n'est pas connectés, on charge le formulaire
     context = { }
