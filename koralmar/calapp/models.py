@@ -13,8 +13,8 @@ def validate_ensc_mail(value):
     
 class User(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
-    email = models.EmailField(max_length=255, validators=[validate_ensc_mail])
-    login = models.CharField(max_length=50)
+    email = models.EmailField(max_length=255, validators=[validate_ensc_mail], unique=True)
+    login = models.CharField(max_length=50, unique=True)
     password = models.CharField(max_length=255) # A hasher
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 
