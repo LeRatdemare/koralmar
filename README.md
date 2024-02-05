@@ -12,7 +12,7 @@
 
 0) S'assurer d'avoir déjà configuré l'environnement (Tuto en dessous)
 1) Ouvrir un terminal bash et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
-2) \[terminal\] Activer l'environnement de travail --> `source env/Script/activate`
+2) \[terminal\] Activer l'environnement de travail --> `source env/Scripts/activate` (ou `source env/bin/activate` sur Mac)
 3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
 4) \[terminal\] Lancer l'application --> `python manage.py runserver`
 5) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
