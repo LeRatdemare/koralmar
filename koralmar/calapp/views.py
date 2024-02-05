@@ -11,8 +11,7 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 def index(request):
-    form = PublicationForm()
-    context = {'form': form}
+    context = { }
     return render(request, 'calapp/index.html', context=context)
 
 def events(request):

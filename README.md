@@ -5,15 +5,16 @@
 
 ### Pré-requis
 
-* Avoir la version 3.9 de python --> commande `python --version` dans un terminal pour voir la version
-    * Sur Windows, si vous n'avez pas la bonne version, télécharger "Python 3.9" sur le Microsoft Store puis vérifier à nouveau depuis un terminal en tapant `python3.9 --version`
-    * Si vous avez plusieurs versions de python installées, utiliser la commande `python3.9 ...` au lieu de `python ...` pour indiquer à windows quelle version vous voulez utiliser
+* Avoir la **version 3.9** de python --> commande `python --version` dans un terminal pour voir la version
+    * Sur Windows, si vous n'avez **pas la bonne version**, télécharger "Python 3.9" sur le **Microsoft Store** puis vérifier à nouveau depuis un terminal en tapant `python3.9 --version`
+    * Si vous avez plusieurs versions de python installées, utiliser la commande `python3.9 ...` au lieu de `python ...` pour **indiquer à windows quelle version** vous voulez utiliser    
 * Avoir [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.0&os=windows&cpu=x86_64&pkg=msi&m=icam) installé sur sa machine --> Saisir "MariaDB" dans sa barre de recherche pour savoir si le logiciel est installé
+* Sur 
 
 ### Lancer l'application locale
 
 0) S'assurer d'avoir déjà configuré l'environnement (Tuto en dessous)
-1) Ouvrir un terminal bash et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
+1) Ouvrir un terminal **Git Bash** et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
 2) \[terminal\] Activer l'environnement de travail --> `source env/Scripts/activate` (ou `source env/bin/activate` sur Mac)
 3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
 4) \[terminal\] Lancer l'application --> `python manage.py runserver`
@@ -30,7 +31,7 @@
 7) \[MySQL Client\] Se connecter sur le terminal "MySQL client" (disponible si MariaDB est installé) ou créer un identifiant et un mot de passe si besoin. **!!! BIEN LES ENREGISTRER et PAS DE CARACTERES SPECIAUX !!!**
 8) \[MySQL Client\] Créer une base de donnée MySQL en étant connecté avec la commande `create database koralmar_db;`
 9) \[MySQL Client\] Changer la DB active avec la commande `use 'koralmar_db';`
-10) \[MySQL Client\] Créer un utilisateur en local pour la DB avec la commande `CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';`
+10) \[MySQL Client\] Créer un utilisateur en local pour la DB avec la commande `CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';` (**Remarque :** remplacer 'user' par un identifiant et 'password' par votre mot de passe)
 11) \[MySQL Client\] Accorder tous les privilèges sur la DB à l'utilisateur créé avec la commande `GRANT ALL PRIVILEGES ON koralmar_db.* TO 'user'@'localhost';`
 
 **Enfin ! L'application est presque prête !**
