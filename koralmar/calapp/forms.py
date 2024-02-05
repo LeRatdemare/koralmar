@@ -1,5 +1,5 @@
 from django import forms
-from calapp.models import Photo, User
+from calapp.models import Photo, User, Publication
 
 class PhotoForm(forms.ModelForm):
     class Meta:
@@ -20,4 +20,15 @@ class UserForm(forms.ModelForm):
             'email': 'Adresse mail (ensc)',
             'login': 'Login',
             'profile_picture': 'Photo de profil',
+        }
+
+class PublicationForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = ('title','description', 'photos', 'creator')
+        labels = {
+            'title': 'Titre de la publication',
+            'description': 'Description',
+            'photos': 'Images',
+            'creator': 'Auteur',
         }

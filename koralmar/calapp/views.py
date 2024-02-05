@@ -1,6 +1,6 @@
 import calapp.logic as logic
 from calapp.models import Photo, User
-from calapp.forms import PhotoForm, UserForm
+from calapp.forms import PhotoForm, UserForm, PublicationForm
 from django.shortcuts import render, redirect
 from django.forms import Form
 from django.contrib import messages
@@ -10,8 +10,9 @@ from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
 
-def index(request):    
-    context = { }
+def index(request):
+    form = PublicationForm()
+    context = {'form': form}
     return render(request, 'calapp/index.html', context=context)
 
 def events(request):
