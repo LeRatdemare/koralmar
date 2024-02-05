@@ -6,6 +6,8 @@
 ### Pré-requis
 
 * Avoir la version 3.9 de python --> commande `python --version` dans un terminal pour voir la version
+    * Sur Windows, si vous n'avez pas la bonne version, télécharger "Python 3.9" sur le Microsoft Store puis vérifier à nouveau depuis un terminal en tapant `python3.9 --version`
+    * Si vous avez plusieurs versions de python installées, utiliser la commande `python3.9 ...` au lieu de `python ...` pour indiquer à windows quelle version vous voulez utiliser
 * Avoir [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.0&os=windows&cpu=x86_64&pkg=msi&m=icam) installé sur sa machine --> Saisir "MariaDB" dans sa barre de recherche pour savoir si le logiciel est installé
 
 ### Lancer l'application locale
