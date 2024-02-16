@@ -109,6 +109,10 @@ def login(request):
     context = { }
     return render(request, 'calapp/login.html', context=context)
 
+def error404(request):
+    context = {}
+    return render(request, "calapp/error404.html", context=context)
+
 ############################ LOGIC
 
 def logout(request):
