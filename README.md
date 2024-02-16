@@ -9,16 +9,24 @@
     * Sur Windows, si vous n'avez **pas la bonne version**, télécharger "Python 3.9" sur le **Microsoft Store** puis vérifier à nouveau depuis un terminal en tapant `python3.9 --version`
     * Si vous avez plusieurs versions de python installées, utiliser la commande `python3.9 ...` au lieu de `python ...` pour **indiquer à windows quelle version** vous voulez utiliser    
 * Avoir [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.4.0&os=windows&cpu=x86_64&pkg=msi&m=icam) installé sur sa machine --> Saisir "MariaDB" dans sa barre de recherche pour savoir si le logiciel est installé
-* Sur 
 
 ### Lancer l'application locale
 
 0) S'assurer d'avoir déjà configuré l'environnement (Tuto en dessous)
 1) Ouvrir un terminal **Git Bash** et se déplacer dans le dossier racine du projet (celui où se trouve le fichier 'README.md')
-2) \[terminal\] Activer l'environnement de travail --> `source env/Scripts/activate` (ou `source env/bin/activate` sur Mac)
-3) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
-4) \[terminal\] Lancer l'application --> `python manage.py runserver`
-5) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+2) Pull les branches main et Frontend (si travail sur le Front) --> `git pull origin main` puis `git pull origin Frontend`
+4) \[terminal\] Activer l'environnement de travail --> `source env/Scripts/activate` (ou `source env/bin/activate` sur Mac)
+5) \[terminal\] Se déplacer dans le dossier du fichier 'manage.py' --> `cd koralmar/`
+6) \[terminal\] Lancer l'application --> `python manage.py runserver`
+7) Saisir le lien de la console (normalment 'http://127.0.0.1:8000/') dans un navigateur
+
+### Finir une session de travail
+
+1) \[terminal\] Arrêter le site `ctrl + c`
+2) \[terminal\] Ajouter toutes les modifications au stage --> `git add .`
+3) \[terminal\] Commit les modifications --> `git commit -m "Mon message de commit"`
+4) \[terminal\] Pull les éventuelles modifications --> `git pull origin main` puis `git pull origin Frontend` puis `git pull origin MaBranche`
+5) \[terminal\] Push les modifications --> `git push origin main`
 
 ### Configuration de l'environnement (1ère fois seulement)
 
@@ -45,7 +53,7 @@ password = "password" # Remplacer par votre mot de passe
 db_name = "koralmar_db"
 ```
 ![Fichier dbinfos](screenshots/Fichier_dbinfos.jpg)
-13) \[terminal\] Appliquer les migrations à la base de donnée ainsi créée avec la commande `python manage.py migrate` (**Remarque :** Il faut être dans le dossier où se trouve le fichier 'manage.py' ou l'un de ses sous-dossiers pour que la commande soit reconnue)
+13) \[terminal\] Appliquer les migrations à la base de donnée ainsi créée avec la commande `python manage.py migrate` (**Remarque :** Il faut être dans le dossier où se trouve le fichier 'manage.py' ou l'un de ses sous-dossiers pour que la commande soit reconnue)<br/>
 14) \[terminal\] Vous pouvez désormais lancer le serveur avec la commande `python manage.py runserver`
 
 **Le site est lancé !**
