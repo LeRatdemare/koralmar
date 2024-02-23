@@ -42,6 +42,13 @@ class Publication(models.Model):
         return f"[{self.creator}] {self.datetime.time} ~ {self.description}"
 
 
+class MusicTheoryLesson(models.Model):
+    canva_link = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=1500, blank=True, null=True)
+    lesson_day = models.DateField()
+    datetime = models.DateTimeField(auto_now_add=True)
+
+
 # These two auto-delete files from filesystem when they are unneeded:
 
 @receiver(models.signals.post_delete, sender=Photo)

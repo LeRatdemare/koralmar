@@ -4,7 +4,7 @@
 
 <h1>Solfège</h1>
 
-<h2>Séance du 02/02/2024</h2>
+{% comment %} <h2>Séance du 02/02/2024</h2>
 <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
@@ -32,6 +32,22 @@
     src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAF9gVaOm84&#x2F;q7Gaii5TU4_FSHr4XTgF_Q&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
   </iframe>
 </div>
-<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAF9gVaOm84&#x2F;q7Gaii5TU4_FSHr4XTgF_Q&#x2F;view?utm_content=DAF9gVaOm84&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Exercice rythmique et mélodique 03</a> par Pauline Prost--waterson et Anoa Morello
+<a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAF9gVaOm84&#x2F;q7Gaii5TU4_FSHr4XTgF_Q&#x2F;view?utm_content=DAF9gVaOm84&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Exercice rythmique et mélodique 03</a> par Pauline Prost--waterson et Anoa Morello {% endcomment %}
+
+{% for music_theory_lesson in music_theory_lessons %}
+{% include 'calapp/includes/music_theory_lesson.html' with music_theory_lesson=music_theory_lesson %}<br>
+{% endfor %}
+
+<h2>Ajouter un nouveau cours</h2>
+{% if is_connected %}
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Ajouter le cours"/>
+  </form>
+  {% else %}
+  <p>Connectez-vous pour ajouter un cours.</p>
+{% endif %}
+
 
 {% endblock %}

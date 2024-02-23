@@ -1,5 +1,5 @@
 from django import forms
-from calapp.models import Photo, User, Publication
+from calapp.models import Photo, User, Publication, MusicTheoryLesson
 
 class PhotoForm(forms.ModelForm):
     class Meta:
@@ -31,4 +31,13 @@ class PublicationForm(forms.ModelForm):
             'description': 'Description',
             'photos': 'Images',
             'creator': 'Auteur',
+        }
+class MusicTheoryLessonForm(forms.ModelForm):
+    class Meta:
+        model = MusicTheoryLesson
+        fields = ('canva_link','description','lesson_day')
+        labels = {
+            'canva_link': 'Lien canva',
+            'description': 'Description',
+            'lesson_day': 'Date du cours'
         }

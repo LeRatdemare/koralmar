@@ -1,7 +1,8 @@
 import calapp.logic as logic
-from calapp.models import Photo, User
-from calapp.forms import PhotoForm, UserForm, PublicationForm
-from django.shortcuts import render, redirect
+from calapp.models import Photo, User, MusicTheoryLesson
+from calapp.forms import PhotoForm, UserForm, MusicTheoryLessonForm
+from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.urls import reverse
 from django.forms import Form
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
@@ -19,7 +20,26 @@ def events(request):
     return render(request, 'calapp/events.html', context=context)
 
 def solfege(request):
-    context = { }
+    is_connected = True
+    # Si l'utilisateur est connecté, il pourra ajouter des cours
+    try :
+        user = User.objects.get(id=request.session['user_id'])
+    except:
+        is_connected = False
+    
+    mlts = MusicTheoryLesson.objects.all().order_by('lesson_day')
+    context = { 'music_theory_lessons': mlts, 'is_connected':is_connected }
+
+    if request.method == 'POST':
+        form = MusicTheoryLessonForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            return HttpResponseRedirect(reverse('solfege'))
+        else:
+            context['form'] = form
+            return render(request, 'calapp/solfege.html', context=context)
+            
+    context['form'] = MusicTheoryLessonForm()
     return render(request, 'calapp/solfege.html', context=context)
 
 def choir(request):
