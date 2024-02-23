@@ -29,8 +29,11 @@
                 </ul>
                 </li>
                 <li><a href="{% url 'contact-us' %}">Nous contacter</a></li>
-                <li><a href="{% url 'login' %}">Se connecter</a></li>
+                {% if is_connected %}
                 <li><a href="{% url 'logout' %}">Se déconnecter</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Se connecter</a></li>
+                {% endif %}
                 <!-- Si on veut rajouter des sous-items :
                 <li><a class='dropdown-arrow' href="{% url 'index' %}">Groupes</a>
                     ET

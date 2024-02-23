@@ -12,11 +12,23 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 def index(request):
-    context = { }
+    is_connected = True
+    # Si l'utilisateur est connecté, il pourra ajouter des cours
+    try :
+        user = User.objects.get(id=request.session['user_id'])
+    except:
+        is_connected = False
+    context = { 'is_connected':is_connected }
     return render(request, 'calapp/index.html', context=context)
 
 def events(request):
-    context = { }
+    is_connected = True
+    # Si l'utilisateur est connecté, il pourra ajouter des cours
+    try :
+        user = User.objects.get(id=request.session['user_id'])
+    except:
+        is_connected = False
+    context = { 'is_connected':is_connected }
     return render(request, 'calapp/events.html', context=context)
 
 def solfege(request):
@@ -43,30 +55,41 @@ def solfege(request):
     return render(request, 'calapp/solfege.html', context=context)
 
 def choir(request):
+    is_connected = True
+    # Si l'utilisateur est connecté, il pourra ajouter des cours
+    try :
+        user = User.objects.get(id=request.session['user_id'])
+    except:
+        is_connected = False
+    context = { 'is_connected':is_connected }
+    
     photos = Photo.objects.all()
-    context = {'photos': photos}
+    context['photos'] = photos
     return render(request, 'calapp/choir.html', context=context)
 
 def contact_us(request):
     # On vérifie que l'utilisateur est connecté
+    is_connected = True
     try :
         user = User.objects.get(id=request.session['user_id'])
     except:
         messages.error(request, "Vous devez d'abord vous connecter...")
         return redirect('login')
+    context = { 'is_connected':is_connected }
 
     # Puis on regarde s'il vient de soummettre un formulaire
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid() :
             form.save()
+            return HttpResponseRedirect(reverse('contact_us'))
         else:
-            context = {'form': form}
+            context['form'] = PhotoForm
             return render(request, 'calapp/contact_us.html', context=context)
-    context = { 'form': PhotoForm }
+    context['form'] = PhotoForm
     return render(request, 'calapp/contact_us.html', context=context)
 
-def register(request): # A TRAVAILLER --> Verification et enregistrement des données
+def register(request):
     # Puis on regarde s'il vient de soummettre un formulaire
     if request.method == 'POST':
         form = UserForm(request.POST, request.FILES)
