@@ -39,5 +39,5 @@ class MusicTheoryLessonForm(forms.ModelForm):
         labels = {
             'canva_link': 'Lien canva',
             'description': 'Description',
-            'lesson_day': 'Date du cours'
+            'lesson_day': 'Date du cours (YYYY-MM-DD)'
         }
