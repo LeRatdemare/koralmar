@@ -1,6 +1,8 @@
 import calapp.logic as logic
 from calapp.models import Photo, User, MusicTheoryLesson
 from calapp.forms import PhotoForm, UserForm, MusicTheoryLessonForm
+from calapp.serializers import PhotoSerializer, UserSerializer, MusicTheoryLessonSerializer
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.urls import reverse
 from django.forms import Form
@@ -156,7 +158,9 @@ def error404(request):
     context = {}
     return render(request, "calapp/error404.html", context=context)
 
+
 ############################ LOGIC
+
 
 def logout(request):
     try:
@@ -165,3 +169,11 @@ def logout(request):
         pass
     messages.info(request, "Vous êtes déconnecté.")
     return redirect('index')
+
+
+############################ DATA
+
+
+def get_music_theory_lessons(request):
+    data = UserSerializer(User.objects.all(), many=True).data
+    return JsonResponse(data, safe=False)
