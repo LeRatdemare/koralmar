@@ -3,7 +3,7 @@ from calapp.models import Photo, User, MusicTheoryLesson
 
 # Register your models here.
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('name', 'owner', 'photo', 'date')
+    list_display = ('name', 'author', 'photo', 'date', 'tag')
 class UserAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'login', 'password', 'profile_picture')
 class MusicTheoryLessonAdmin(admin.ModelAdmin):

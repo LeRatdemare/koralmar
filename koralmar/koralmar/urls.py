@@ -31,6 +31,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('error404/', views.error404, name='error404'),
+    path('surveys/', views.surveys, name='surveys'),
     path('mlts/', views.get_music_theory_lessons, name='get-mlts'),
     # path('get-photo/<int:id>/', views.get_photo, name='get-photo'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

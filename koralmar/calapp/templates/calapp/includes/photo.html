@@ -1,6 +1,11 @@
-{% load static %}
-{% get_media_prefix as MEDIA_PREFIX %}
-
-<h3>{{ photo.name }} - Par {{ photo.owner }}</h3>
+{% load static %} {% get_media_prefix as MEDIA_PREFIX %}
+<h3>
+  {{ photo.name }}{% if photo.author %} - Par {{ photo.author }}{% else %} -
+  Auteur inconnu{% endif %}
+</h3>
 <p>{{ photo.date }}</p>
-<img src="{{ MEDIA_PREFIX }}{{ photo.photo }}" alt="{{ photo.name }}" width="300"/>
+<img
+  src="{{ MEDIA_PREFIX }}{{ photo.photo }}"
+  alt="{{ photo.name }}"
+  width="300"
+/>

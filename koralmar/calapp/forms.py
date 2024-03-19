@@ -4,11 +4,12 @@ from calapp.models import Photo, User, Publication, MusicTheoryLesson
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
-        fields = ('name', 'owner', 'photo')
+        fields = ('name', 'author', 'photo', 'tag')
         labels = {
             'name': "Titre de l'image",
-            'owner': "Propriétaire",
+            'author': "Propriétaire",
             'photo': "Image",
+            'tag': "Type d'image",
         }
 
 class UserForm(forms.ModelForm):

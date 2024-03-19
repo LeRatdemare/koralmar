@@ -1,0 +1,8 @@
+{% extends 'calapp/base.html' %} {% block content %}
+
+<h1>Sondages</h1>
+
+{% for logo in logos %}<br />
+{% include 'calapp/includes/photo.html' with photo=logo%}
+<br />
+{% endfor %} {% endblock %}

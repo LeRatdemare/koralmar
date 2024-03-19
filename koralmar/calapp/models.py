@@ -25,10 +25,14 @@ class User(models.Model):
         return f"{self.name}"
 
 class Photo(models.Model):
+    class Tag(models.TextChoices):
+        LOGO = "LOGO"
+        MISCELLANEOUS = "MISC"
     name = models.CharField(max_length=255, blank=True, null=True)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    author = models.CharField(max_length=255, blank=True, null=True)
     photo = models.ImageField(upload_to='photos/')
     date = models.DateTimeField(auto_now=True)
+    tag = models.fields.CharField(choices=Tag.choices, max_length=8)
 
 # Create your models here.
 class Publication(models.Model):

@@ -4,6 +4,8 @@ from calapp.forms import PhotoForm, UserForm, MusicTheoryLessonForm
 from calapp.serializers import PhotoSerializer, UserSerializer, MusicTheoryLessonSerializer
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404
 from django.urls import reverse
 from django.forms import Form
 from django.contrib import messages
@@ -84,7 +86,7 @@ def contact_us(request):
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid() :
             form.save()
-            return HttpResponseRedirect(reverse('contact_us'))
+            return HttpResponseRedirect(reverse('contact-us'))
         else:
             context['form'] = PhotoForm
             return render(request, 'calapp/contact_us.html', context=context)
@@ -117,7 +119,7 @@ def register(request):
             request.session["user_id"] = created_user.id
             messages.success(request, "Compte créé avec succès, vous êtes maintenant connecté.")
             return redirect('index')
-                
+            
         else:
             messages.error(request, "Le form soumis n'est pas valide.")
             context = {'form': form}
@@ -151,12 +153,17 @@ def login(request):
             messages.error(request, "Le login et le mot de passe ne coïncident pas.")
             return redirect('login')
     # Si on vient seulement d'arriver sur la page et qu'on n'est pas connectés, on charge le formulaire
-    context = { }
+    context = {}
     return render(request, 'calapp/login.html', context=context)
 
 def error404(request):
     context = {}
     return render(request, "calapp/error404.html", context=context)
+
+def surveys(request):
+    logos = Photo.objects.filter(tag="LOGO")
+    context = {'logos': logos}
+    return render(request, 'calapp/surveys.html', context=context)
 
 
 ############################ LOGIC
@@ -175,5 +182,5 @@ def logout(request):
 
 
 def get_music_theory_lessons(request):
-    data = UserSerializer(User.objects.all(), many=True).data
+    data = MusicTheoryLessonSerializer(MusicTheoryLesson.objects.all(), many=True).data
     return JsonResponse(data, safe=False)

@@ -4,15 +4,41 @@
 
 <h2>Inspirations</h2>
 <p>
-    <iframe width="448" height="252" src="https://www.youtube.com/embed/lVqNI6qP1ms" title="Disney Meddley" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowFullScreen></iframe><br/>
-    <iframe width="448" height="252" src="https://www.youtube.com/embed/9RnhVDTks3g" title="Lion sleeps tonight" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowFullScreen></iframe><br/>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/71SkYHPsw0PRA6aoreHq3y?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><br/>
+  <iframe
+    width="448"
+    height="252"
+    src="https://www.youtube.com/embed/lVqNI6qP1ms"
+    title="Disney Meddley"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe
+  ><br />
+  <iframe
+    width="448"
+    height="252"
+    src="https://www.youtube.com/embed/9RnhVDTks3g"
+    title="Lion sleeps tonight"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe
+  ><br />
+  <iframe
+    style="border-radius: 12px"
+    src="https://open.spotify.com/embed/track/71SkYHPsw0PRA6aoreHq3y?utm_source=generator"
+    width="100%"
+    height="352"
+    frameborder="0"
+    allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    loading="lazy"
+  ></iframe
+  ><br />
 </p>
 
-
 <h2>Banque de photos</h2>
-{% for photo in photos %}
-{% include 'calapp/includes/photo.html' with photo=photo %}<br>
-{% endfor %}
-
-{% endblock %}
+{% for photo in photos %} <br />
+{% include 'calapp/includes/photo.html' with photo=photo %}
+<br />
+{% endfor %} {% endblock %}
