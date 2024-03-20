@@ -182,7 +182,6 @@ def surveys(request: HttpRequest):
         'is_connected':is_connected,
     }
     if is_connected:
-        context['user'] = user
         context['user_vote_logo_id'] = user_vote_logo_id
     
     # Handle form response
