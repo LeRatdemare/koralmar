@@ -34,6 +34,10 @@ class Photo(models.Model):
     date = models.DateTimeField(auto_now=True)
     tag = models.fields.CharField(choices=Tag.choices, max_length=8)
 
+class LogoVote(models.Model):
+    logo = models.ForeignKey(Photo, on_delete=models.PROTECT)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 # Create your models here.
 class Publication(models.Model):
     title = models.CharField(max_length=127)

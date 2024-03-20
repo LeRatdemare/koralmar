@@ -1,8 +1,8 @@
 import calapp.logic as logic
-from calapp.models import Photo, User, MusicTheoryLesson
+from calapp.models import Photo, User, MusicTheoryLesson, LogoVote
 from calapp.forms import PhotoForm, UserForm, MusicTheoryLessonForm
 from calapp.serializers import PhotoSerializer, UserSerializer, MusicTheoryLessonSerializer
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import get_list_or_404
@@ -11,7 +11,6 @@ from django.forms import Form
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 # from PIL import Image
-
 # Create your views here.
 
 
@@ -156,14 +155,52 @@ def login(request):
     context = {}
     return render(request, 'calapp/login.html', context=context)
 
+def surveys(request: HttpRequest):
+    # On vérifie que l'utilisateur est connecté
+    is_connected = True
+    user = None
+    try:
+        user = User.objects.get(id=request.session['user_id'])
+    except:
+        is_connected = False
+    
+    # Retreiving data from database
+    logos = Photo.objects.filter(tag="LOGO")
+    user_vote_logo_id = None
+    votes = {}
+    for logo in logos:
+        votes[logo.id] = 0
+    for vote in LogoVote.objects.all():
+        votes[vote.logo.id] += 1
+        if vote.user == user:
+            user_vote_logo_id = vote.logo.id
+            print("yeaaa")
+    # Set context
+    context = {
+        'logos':logos,
+        'votes':votes,
+    }
+    if is_connected:
+        context['user'] = user
+        context['user_vote_logo_id'] = user_vote_logo_id
+    
+    # Handle form response
+    if request.method == 'POST':
+        voted_logo = Photo.objects.get(id=request.POST['logoChoice'])
+        # Check if user had already voted
+        try:
+            user_vote = LogoVote.objects.get(user=user)
+            user_vote.logo = voted_logo
+            user_vote.save()
+        except LogoVote.DoesNotExist:
+            LogoVote.objects.create(logo=voted_logo, user=user)
+        return HttpResponseRedirect(reverse('surveys'))
+        
+    return render(request, 'calapp/surveys.html', context=context)
+
 def error404(request):
     context = {}
     return render(request, "calapp/error404.html", context=context)
-
-def surveys(request):
-    logos = Photo.objects.filter(tag="LOGO")
-    context = {'logos': logos}
-    return render(request, 'calapp/surveys.html', context=context)
 
 
 ############################ LOGIC
