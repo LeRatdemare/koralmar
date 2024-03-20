@@ -14,7 +14,7 @@
   {% endif %}
   {% endfor %}
 
-  {% if logos|length > 0 and is_connected %}
+  {% if is_connected %}
   <input type="radio" id="logoChoice{{forloop.counter0}}" name="logoChoice"
   value="{{logo.id}}" {% if user_vote_logo_id and logo.id == user_vote_logo_id or forloop.counter0 == 0 %}checked{% endif %} />
   <label for="logoChoice{{forloop.counter0}}"
@@ -28,7 +28,7 @@
     <a href="{% url 'contact-us' %}">ici</a> !
   </p>
   {% endfor %}<br />
-  {% if is_connected %}
+  {% if logos|length > 0 and is_connected %}
   <input type="submit" value="Valider mon vote" />
   {% endif %}
 </form>
