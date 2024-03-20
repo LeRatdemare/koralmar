@@ -3,9 +3,10 @@
 <h1>Sondages</h1>
 
 <h2>Vote pour ton logo préféré</h2>
+{% if not is_connected %}<p><a href="{% url "login" %}">Connecte toi</a> pour pouvoir voter !</p>{% endif %}
 <form method="post">
   {% csrf_token %} {% for logo in logos %}<br />
-  <div {% if user_vote_logo_id and logo.id == user_vote_logo_id %}class="selected_option"{% endif %}>
+  <div {% if user_vote_logo_id and logo.id == user_vote_logo_id %}class="selected_option"{% else %}class="unselected_option"{% endif %}>
   {% include 'calapp/includes/photo.html' with photo=logo%}
   <br />
   {% for logo_id, nb_votes in votes.items %}
