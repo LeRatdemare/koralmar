@@ -7,7 +7,7 @@ class PhotoForm(forms.ModelForm):
         fields = ('name', 'author', 'photo', 'tag')
         labels = {
             'name': "Titre de l'image",
-            'author': "Propriétaire",
+            'author': "Artiste",
             'photo': "Image",
             'tag': "Type d'image",
         }
