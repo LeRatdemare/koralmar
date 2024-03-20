@@ -5,19 +5,31 @@
 <h2>Vote pour ton logo préféré</h2>
 <form method="post">
   {% csrf_token %} {% for logo in logos %}<br />
+  <div {% if user_vote_logo_id and logo.id == user_vote_logo_id %}class="selected_option"{% endif %}>
   {% include 'calapp/includes/photo.html' with photo=logo%}
   <br />
+  {% for logo_id, nb_votes in votes.items %}
+  {% if logo_id == logo.id %}
+  <p>Ce logo a pour l'instant {{nb_votes}} vote{% if nb_votes > 1 %}s{% endif %}.</p>
+  {% endif %}
+  {% endfor %}
+
+  {% if is_connected %}
   <input type="radio" id="logoChoice{{forloop.counter0}}" name="logoChoice"
   value="{{logo.id}}" {% if user_vote_logo_id and logo.id == user_vote_logo_id or forloop.counter0 == 0 %}checked{% endif %} />
   <label for="logoChoice{{forloop.counter0}}"
-    >Vote pour le logo de {{logo.author}}</label
+  >Vote pour le logo de {{logo.author}}</label
   ><br />
+  {% endif %}
+  </div>
   {% empty %}
   <p>
     Aucun logo n'a été posté, déposez les
     <a href="{% url 'contact-us' %}">ici</a> !
   </p>
   {% endfor %}<br />
-  <input type="submit" value="Envoyer" />
+  {% if is_connected %}
+  <input type="submit" value="Valider mon vote" />
+  {% endif %}
 </form>
 {% endblock %}

@@ -179,6 +179,7 @@ def surveys(request: HttpRequest):
     context = {
         'logos':logos,
         'votes':votes,
+        'is_connected':is_connected,
     }
     if is_connected:
         context['user'] = user
